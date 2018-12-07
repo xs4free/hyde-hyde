@@ -1,0 +1,56 @@
+<section class="comments-area">
+  <a id="comments"></a>
+
+  {{ $.Scratch.Set "commentCount" 0 }}
+  {{ $.Scratch.Set "commentFolder" (string .File.BaseFileName) }}
+
+  {{ with .Page.Params.commentFolder }}
+    {{ $.Scratch.Set "commentFolder" . }}
+  {{ end }}
+
+  {{ $entryId := $.Scratch.Get "commentFolder" }}
+  {{ range $index, $comments := (index $.Site.Data.comments $entryId ) }}
+    {{ $.Scratch.Add "commentCount" 1 }}
+  {{ end }}       
+
+  {{ if eq ($.Scratch.Get "commentCount") 0 }}
+    <h3><i class="fas fa-comment-alt"></i> Nog geen reacties op “{{ .Title }}”</h3>
+  {{ else }}  
+    <h3><i class="fas fa-comment-alt"></i> {{$.Scratch.Get "commentCount" }} reacties op “{{ .Title }}”</h3>
+
+    <ol>
+    {{ range $index, $comments := (index $.Site.Data.comments $entryId ) }}
+      {{ if not .replyTo }}
+      <li>
+        <article id="comment-{{ .id }}">
+          <div class="d-flex">
+            <div>
+                <img class="avatar" src="https://secure.gravatar.com/avatar/{{ .email }}?s=100&d=mm&r=g">
+            </div>
+            <div>
+              <div class="author">
+                {{ .name }}
+                <!-- <a id="{{ .id }}" href="#comment-form" onclick="changeValue('fields[replyTo]', '{{ .id }}')" aria-label="Reageren op {{ .name }}">
+                  <i class="fas fa-reply"></i> reageren
+                </a> -->
+              </div>
+              <small>
+                <a href="#comment-{{ .id }}" title="Link naar deze reactie">
+                  <time>{{ dateFormat "Monday 2 Jan 2006 om 15:04:05" .date }}</time>
+                  <!-- <time datetime="{{ .date }}">{{ dateFormat (default (i18n "shortdateFormat") .Site.Params.dateformat) .date}}</time> -->
+                </a>
+              </small>
+              <p>{{ .body | markdownify }}</p>
+            </div>
+          </div>
+          <hr class="blog-seperator"/>
+        </article>
+        {{ partial "page-single/comment/staticman/comment-replies" (dict "entryId_parent" $entryId "SiteDataComments_parent" $.Site.Data.comments "parentId" .id "parentName" .name "context" .) }}
+      </li>
+      {{ end }}
+    {{ end }}
+    </ol>
+  {{ end }}
+
+  <!-- {{ partial "page-single/comment/staticman/comment-form" . }} -->
+</section>

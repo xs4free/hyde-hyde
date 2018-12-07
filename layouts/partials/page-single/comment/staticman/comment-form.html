@@ -1,0 +1,69 @@
+<section class="js-comments staticman-comments">
+  <a id="comment-form"></a>
+  <h3>{{ i18n "giveReply" }}</h3>
+  
+  {{ $slug := replace .URL "/" "" }}
+  
+  <form class="js-form form" method="post" action="{{ .Site.Params.staticman.api}}">
+    <input type="hidden" name="options[slug]" value="{{ replace .URL "/" "" }}">
+    <input type="hidden" name="options[parent]" value="">
+  
+    {{ if .Site.Params.staticman.recaptcha }}
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ .Site.Params.staticman.recaptcha.sitekey }}">
+    <!-- <input type="hidden" name="options[reCaptcha][secret]"  value="{{ .Site.Params.staticman.recaptcha.secret }}"> -->
+    {{ end }}
+  
+    <fieldset>
+      <div class="textfield">
+        <textarea name="fields[comment]" type="text" placeholder="{{ i18n "reply" }}"></textarea>
+        <p class="markdown-notice">{{ i18n "useMarkdown" | safeHTML }}</p>
+      </div>
+    </fieldset>
+  
+    <fieldset>
+      <div class="textfield">
+        <input name="fields[name]" type="text" placeholder="{{ i18n "yourName" }}"/>
+      </div>
+    </fieldset>
+  
+    <fieldset>
+      <div class="textfield">
+        <input type="email" name="fields[email]"  placeholder="{{ i18n "yourEmail" }}"/>
+      </div>
+    </fieldset>
+  
+    <fieldset>
+      <div class="textfield">
+        <input type="text" name="fields[website]"  placeholder="{{ i18n "yourWebsite" }}"/>
+      </div>
+    </fieldset>
+  
+    {{ with .Site.Params.staticman.recaptcha.sitekey }}
+    <fieldset>
+      <div class="g-recaptcha" data-sitekey="{{ . }}">
+        <input type="hidden" name="options[reCaptcha][token]" id="recaptcha_token" value="" />
+      </div>
+    </fieldset>
+    {{ end }}
+  
+    <fieldset>
+      <button type="submit">
+          {{ i18n "submit" }} <i class="fa fa-circle-notch fa-spin hide"></i>
+      </button>
+    </fieldset>
+
+    <p class="submit-errors hide">
+      Er is iets fout gegaan bij het versturen van jouw reactie. Probeer het nog eens.
+    </p>
+
+    {{ if .Site.Params.staticman.akismet }}
+    <p class="akismet_notice">
+      {{ i18n "akismet-notice" | safeHTML }}
+    </p>
+    {{ end }}
+  </form>
+
+  <div class="submit-succeeded hide">
+    Bedankt voor jouw reactie! Hij wordt getoond op de website zodra deze is goedgekeurd.
+  </div>
+</section>
