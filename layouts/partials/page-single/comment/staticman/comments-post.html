@@ -14,9 +14,9 @@
   {{ end }}       
 
   {{ if eq ($.Scratch.Get "commentCount") 0 }}
-    <h3><i class="fas fa-comment-alt"></i> Nog geen reacties op “{{ .Title }}”</h3>
+    <h3><i class="fas fa-comment-alt"></i> No replies yet on “{{ .Title }}”</h3>
   {{ else }}  
-    <h3><i class="fas fa-comment-alt"></i> {{$.Scratch.Get "commentCount" }} reacties op “{{ .Title }}”</h3>
+    <h3><i class="fas fa-comment-alt"></i> {{$.Scratch.Get "commentCount" }} replies on “{{ .Title }}”</h3>
 
     <ol>
     {{ range $index, $comments := (index $.Site.Data.comments $entryId ) }}
