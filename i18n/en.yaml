@@ -1,0 +1,34 @@
+- id: give-reply
+  translation: "Your reply"
+- id: reply-body
+  translation: "Reply"
+- id: your-body
+  translation: "Your reply."
+- id: use-markdown
+  translation: "You can use <a href=\"https://nl.wikipedia.org/wiki/Markdown\">MarkDown</a> to format your reply."
+- id: reply-name
+  translation: "Name"
+- id: your-name
+  translation: "Your name"
+- id: reply-email
+  translation: "Email"
+- id: your-email
+  translation: "Your email-address"
+- id: submit
+  translation: "Send reply"
+- id: akismet-notice
+  translation: "This  website uses Akismet to reduce  spam. <a href=\"https://akismet.com/privacy/\" target=\"_blank\" rel=\"nofollow noopener external\">Read how your reply will be processed</a>."
+- id: submit-error
+  translation: "Something went wrong while sending your reply. Please try again."
+- id: submit-succeeded
+  translation: "Thanks for your reply! It will be shown as soon as it's been approved."
+- id: link-this-reply
+  translation: "Link to this reply"
+- id: reply-to
+  translation: "Reply to"  
+- id: no-replies-yet-on
+  translation: "No replies yet on"
+- id: replies-on
+  translation: "replies on"  
+- id: reply
+  translation: "reply"    

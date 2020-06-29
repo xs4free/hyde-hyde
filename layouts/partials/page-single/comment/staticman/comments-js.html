@@ -1,0 +1,8 @@
+{{ with .Site.Params.staticman.recaptcha.sitekey }}
+<script src='https://www.google.com/recaptcha/api.js?render={{ . }}'></script>
+{{ end }}
+
+{{- if .Site.Params.staticman.staticman -}}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="{{ "js/staticman.js" | absURL }}"></script>
+{{- end -}}

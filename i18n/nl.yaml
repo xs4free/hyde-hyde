@@ -1,0 +1,34 @@
+- id: give-reply
+  translation: "Jouw reactie"
+- id: reply-body
+  translation: "Reactie"
+- id: your-body
+  translation: "Jouw reactie."
+- id: use-markdown
+  translation: "Je kunt <a href=\"https://nl.wikipedia.org/wiki/Markdown\">MarkDown</a> gebruiken om jouw reactie opmaak te geven."
+- id: reply-name
+  translation: "Naam"
+- id: your-name
+  translation: "Jouw naam"
+- id: reply-email
+  translation: "Email"
+- id: your-email
+  translation: "Jouw email-adres"
+- id: submit
+  translation: "Verstuur reactie"
+- id: akismet-notice
+  translation: "Deze website maakt gebruik van Akismet om spam te verminderen. <a href=\"https://akismet.com/privacy/\" target=\"_blank\" rel=\"nofollow noopener external\">Lees hier hoe jouw reactie wordt verwerkt</a>."
+- id: submit-error
+  translation: "Er is iets fout gegaan bij het versturen van jouw reactie. Probeer het nog eens."
+- id: submit-succeeded
+  translation: "Bedankt voor jouw reactie! Hij wordt getoond op de website zodra deze is goedgekeurd."
+- id: link-this-reply
+  translation: "Link naar deze reactie"
+- id: reply-to
+  translation: "Reageren op"
+- id: no-replies-yet-on
+  translation: "Nog geen reacties op"
+- id: replies-on
+  translation: "Reacties op"
+- id: reply
+  translation: "Reageren"

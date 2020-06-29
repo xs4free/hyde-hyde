@@ -1,69 +1,68 @@
 <section class="js-comments staticman-comments">
   <a id="comment-form"></a>
-  <h3>{{ i18n "giveReply" }}</h3>
+  <h3>{{ i18n "give-reply" }}</h3>
   
-  {{ $slug := replace .URL "/" "" }}
+  {{ $slug := replace .File.Dir "\\" "" }}
   
-  <form class="js-form form" method="post" action="{{ .Site.Params.staticman.api}}">
-    <input type="hidden" name="options[slug]" value="{{ replace .URL "/" "" }}">
-    <input type="hidden" name="options[parent]" value="">
-  
+  <form class="js-form form form-horizontal" method="post" action="{{ .Site.Params.staticman.api}}">
+    <input type="hidden" name="options[slug]" value="{{ $slug }}">
+    <input type="hidden" name="options[origin]" value="{{ .Permalink }}">
+
     {{ if .Site.Params.staticman.recaptcha }}
     <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ .Site.Params.staticman.recaptcha.sitekey }}">
-    <!-- <input type="hidden" name="options[reCaptcha][secret]"  value="{{ .Site.Params.staticman.recaptcha.secret }}"> -->
     {{ end }}
   
-    <fieldset>
-      <div class="textfield">
-        <textarea name="fields[comment]" type="text" placeholder="{{ i18n "reply" }}"></textarea>
-        <p class="markdown-notice">{{ i18n "useMarkdown" | safeHTML }}</p>
+    <input type="hidden" name="fields[replyTo]" value="0">
+
+    <div class="form-group row">
+      <label for="reply-body" class="col-sm-2 col-form-label">{{ i18n "reply-body" }}</label>
+      <div class="col-sm-10">
+        <textarea name="fields[body]" id="reply-body" type="text" placeholder="{{ i18n "your-body" }}" class="form-control" aria-describedby="useMarkdown"></textarea>
+        <p id="useMarkdown" class="form-text text-muted markdown-notice">{{ i18n "use-markdown" | safeHTML }}</p>
       </div>
-    </fieldset>
-  
-    <fieldset>
-      <div class="textfield">
-        <input name="fields[name]" type="text" placeholder="{{ i18n "yourName" }}"/>
+    </div>
+
+    <div class="form-group row">
+      <label for="reply-name" class="col-sm-2 col-form-label">{{ i18n "reply-name" }}</label>
+      <div class="col-sm-10">
+        <input name="fields[name]" id="reply-name" type="text" placeholder="{{ i18n "your-name" }}"/>
       </div>
-    </fieldset>
-  
-    <fieldset>
-      <div class="textfield">
-        <input type="email" name="fields[email]"  placeholder="{{ i18n "yourEmail" }}"/>
+    </div>
+    
+    <div class="form-group row">
+      <label for="reply-email" class="col-sm-2 col-form-label">{{ i18n "reply-email" }}</label>
+      <div class="col-sm-10">
+        <input name="fields[email]" id="reply-email" type="email" placeholder="{{ i18n "your-email" }}"/>
       </div>
-    </fieldset>
+    </div>
   
-    <fieldset>
-      <div class="textfield">
-        <input type="text" name="fields[website]"  placeholder="{{ i18n "yourWebsite" }}"/>
+    <!-- <fieldset>
+      <div class="notify-me">
+        <input type="checkbox" id="comment-form-reply" name="options[subscribe]" value="email">
+        Send me an email when someone comments on this post.
       </div>
-    </fieldset>
-  
+    </fieldset> -->
+
     {{ with .Site.Params.staticman.recaptcha.sitekey }}
-    <fieldset>
-      <div class="g-recaptcha" data-sitekey="{{ . }}">
-        <input type="hidden" name="options[reCaptcha][token]" id="recaptcha_token" value="" />
-      </div>
-    </fieldset>
+    <input type="hidden" name="options[reCaptcha][token]" id="recaptcha_token" value="" data-sitekey="{{ . }}" />
     {{ end }}
-  
-    <fieldset>
-      <button type="submit">
+
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">
           {{ i18n "submit" }} <i class="fa fa-circle-notch fa-spin hide"></i>
-      </button>
-    </fieldset>
-
-    <p class="submit-errors hide">
-      Er is iets fout gegaan bij het versturen van jouw reactie. Probeer het nog eens.
-    </p>
-
-    {{ if .Site.Params.staticman.akismet }}
-    <p class="akismet_notice">
-      {{ i18n "akismet-notice" | safeHTML }}
-    </p>
-    {{ end }}
+        </button>
+        {{ if .Site.Params.staticman.akismet }}
+          <p id="askismet" class="form-text text-muted akismet_notice">{{ i18n "akismet-notice" | safeHTML }}</p>
+        {{ end }}
+        <p class="submit-errors hide">
+          {{ i18n "submit-error" }}
+        </p>
+      </div>
+    </div>
   </form>
 
   <div class="submit-succeeded hide">
-    Bedankt voor jouw reactie! Hij wordt getoond op de website zodra deze is goedgekeurd.
+    {{ i18n "submit-succeeded" }}
   </div>
 </section>
