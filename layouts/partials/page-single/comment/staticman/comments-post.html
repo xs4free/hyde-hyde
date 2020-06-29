@@ -14,9 +14,9 @@
   {{ end }}       
 
   {{ if eq ($.Scratch.Get "commentCount") 0 }}
-    <h3><i class="fas fa-comment-alt"></i> No replies yet on “{{ .Title }}”</h3>
+    <h3><i class="fas fa-comment-alt"></i> {{ i18n "no-replies-yet-on" }} “{{ .Title }}”</h3>
   {{ else }}  
-    <h3><i class="fas fa-comment-alt"></i> {{$.Scratch.Get "commentCount" }} replies on “{{ .Title }}”</h3>
+    <h3><i class="fas fa-comment-alt"></i> {{$.Scratch.Get "commentCount" }} {{ i18n "replies-on" }} “{{ .Title }}”</h3>
 
     <ol>
     {{ range $index, $comments := (index $.Site.Data.comments $entryId ) }}
@@ -30,27 +30,26 @@
             <div>
               <div class="author">
                 {{ .name }}
-                <!-- <a id="{{ .id }}" href="#comment-form" onclick="changeValue('fields[replyTo]', '{{ .id }}')" aria-label="Reageren op {{ .name }}">
-                  <i class="fas fa-reply"></i> reageren
-                </a> -->
+                <a id="{{ .id }}" href="#comment-form" onclick="changeValue('fields[replyTo]', '{{ .id }}')" aria-label="{{ i18n "reply-to" }} {{ .name }}">
+                  <i class="fas fa-reply"></i> {{ i18n "reply" }}
+                </a>
               </div>
               <small>
-                <a href="#comment-{{ .id }}" title="Link naar deze reactie">
+                <a href="#comment-{{ .id }}" title="{{ i18n "link-this-reply" }}">
                   <time>{{ dateFormat "Monday 2 Jan 2006 om 15:04:05" .date }}</time>
-                  <!-- <time datetime="{{ .date }}">{{ dateFormat (default (i18n "shortdateFormat") .Site.Params.dateformat) .date}}</time> -->
                 </a>
               </small>
               <p>{{ .body | markdownify }}</p>
             </div>
           </div>
-          <hr class="blog-seperator"/>
         </article>
         {{ partial "page-single/comment/staticman/comment-replies" (dict "entryId_parent" $entryId "SiteDataComments_parent" $.Site.Data.comments "parentId" .id "parentName" .name "context" .) }}
+        <hr class="blog-seperator"/>
       </li>
       {{ end }}
     {{ end }}
     </ol>
   {{ end }}
 
-  <!-- {{ partial "page-single/comment/staticman/comment-form" . }} -->
+  {{ partial "page-single/comment/staticman/comment-form" . }}
 </section>
